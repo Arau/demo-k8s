@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Set up of S3 bucket for k8s operational purposes.
+# Please use a bucket that doesn't collide with an existing one.
+
+# Load variables to have name consistency across the bootstrap process
+source ../etc/vars.conf
+
+#Variables defined at vars
+# S3_BUCKET_NAME
+# AWS_REGION
+
+bucket_exists=$(aws s3 ls | grep -c $S3_BUCKET_NAME)
+
+if [ $bucket_exists -eq 1 ]; then
+    echo "The bucket $S3_BUCKET_NAME already exists, please use a different bucket name. Finishing execution for security."
+    exit 1
+fi
+
+
+aws s3api create-bucket --region $AWS_REGION --bucket $S3_BUCKET_NAME  --create-bucket-configuration LocationConstraint=$AWS_REGION
+aws s3api put-bucket-versioning --region $AWS_REGION --bucket $S3_BUCKET_NAME --versioning-configuration Status=Enabled
