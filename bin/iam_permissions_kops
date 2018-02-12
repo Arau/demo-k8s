@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Configuration of IAM group and user for kops
+
+# Load variables to have name consistency across the bootstrap process
+source ../etc/vars.conf
+
+#Variables defined at vars
+# IAM_NAME
+# PROFILE_NAME
+
+aws iam create-group --group-name $IAM_NAME
+
+aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonEC2FullAccess --group-name $IAM_NAME
+aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonRoute53FullAccess --group-name $IAM_NAME
+aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess --group-name $IAM_NAME
+aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/IAMFullAccess --group-name $IAM_NAME
+aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonVPCFullAccess --group-name $IAM_NAME
+
+aws iam create-user --user-name $IAM_NAME
+
+aws iam add-user-to-group --user-name $IAM_NAME --group-name $IAM_NAME
+
+aws iam create-access-key --user-name $IAM_NAME 
+
+cat <<END
+You can configure a profile with the access/secret keys above.
+> aws configure --profile $PROFILE_NAME
+
+"aws configure" doesn't export these vars for kops to use, so please execute the exports now
+export AWS_ACCESS_KEY_ID=\$(aws configure get aws_access_key_id --profile $PROFILE_NAME)
+export AWS_SECRET_ACCESS_KEY=\$(aws configure get aws_secret_access_key --profile $PROFILE_NAME)
+END
