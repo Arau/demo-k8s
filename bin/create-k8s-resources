@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+# Wrapper to deploy YAML specs in the right order
+SPECS_DIR=../k8s-specs
+
+kubectl create -f $SPECS_DIR/namespace.yaml
+kubectl create -f $SPECS_DIR/configmap.yaml
+kubectl create -f $SPECS_DIR/default-backend.yaml
+kubectl create -f $SPECS_DIR/svc-nginx-ingress.yaml
+kubectl create -f $SPECS_DIR/deploy-nginx-ingress-controller.yaml
