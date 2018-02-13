@@ -19,4 +19,4 @@ if [ $zone_exists -eq 1 ]; then
     exit 1
 fi
 
-aws route53 create-hosted-zone --name $DNS_ZONE_NAME --caller-reference <(date "+%N")
+aws route53 create-hosted-zone --name $DNS_ZONE_NAME --caller-reference `date "+%H%M%S%N"`
