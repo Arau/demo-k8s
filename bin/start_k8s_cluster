@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Load variables to have name consistency across the bootstrap process
+source ../etc/vars.conf
+
+#Variables defined at vars
+# KOPS_STATE_STORE
+# CLUSTER_NAME
+# DNS_ZONE
+# AWS_REGION
+
+kops create cluster "$CLUSTER_NAME" \
+    --cloud aws \
+    --master-count 3 \
+    --node-count 2 \
+    --state "$KOPS_STATE_STORE" \
+    --dns-zone "$DNS_ZONE_NAME" \
+    --master-size t2.medium \
+    --node-size t2.small \
+    --zones "${AWS_REGION}a,${AWS_REGION}b,${AWS_REGION}c" \
+    --master-zones "${AWS_REGION}a,${AWS_REGION}b,${AWS_REGION}c" \
+    --networking kopeio-vxlan \
+    --topology private \
+    --bastion=true \
+    --yes
+
