@@ -52,3 +52,7 @@ Execute helpers following this order:
     - demo-ingress: Forwards all HTTP traffic to demo-app service. Even though, an ingress rule and controller is not necessary for a hello world app, the design focus on scale both applications and resources if needed. With ingress rules we enable different DNS names using the same ELB to access the cluster.
 - Application POD:
     - The NodeJS pod spec is defined in the deployment. The docker image used can be found on the repository arau/demo-nodejs. You can find the details in the docker directory of the project.
+
+## Considerations
+
+The cluster doesn't add system components like logging aggregation, public DNS auto update or monitoring as any production cluster should implement because of the purpose of the repo.
