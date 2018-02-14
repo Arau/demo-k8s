@@ -1,0 +1,12 @@
+{
+  "name": "demo",
+  "version": "0.0.1",
+  "description": "Hello Wold",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.1"
+  }
+}
