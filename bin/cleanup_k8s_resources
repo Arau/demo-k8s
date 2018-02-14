@@ -2,6 +2,6 @@
 
 set -e
 
-kubectl delete --namespace=demo pod,svc --all
+kubectl delete --namespace=demo pod,svc,ing --all
 kubectl delete ns demo
 

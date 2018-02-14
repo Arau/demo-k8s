@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e 
+
 # Configuration of IAM group and user for kops
 
 # Load variables to have name consistency across the bootstrap process

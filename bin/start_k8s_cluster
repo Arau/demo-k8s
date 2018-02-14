@@ -5,6 +5,8 @@
 # to see the changes before triggering the bootstrap, you should remove
 # that flag.
 
+set -e
+
 # Load variables to have name consistency across the bootstrap process
 source ../etc/vars.conf
 

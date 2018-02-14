@@ -3,6 +3,8 @@
 # Set up of S3 bucket for k8s operational purposes.
 # Please use a bucket that doesn't collide with an existing one.
 
+set -e
+
 # Load variables to have name consistency across the bootstrap process
 source ../etc/vars.conf
 

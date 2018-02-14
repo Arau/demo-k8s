@@ -3,6 +3,7 @@
 # Set up of R53 zone to use for k8s operation purposes.
 # Please set up a domain you own and a zone name that doesn't collide with an existing one.
 
+set -e
 
 # Load variables to have name consistency across the bootstrap process
 source ../etc/vars.conf
