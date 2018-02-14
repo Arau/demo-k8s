@@ -19,7 +19,7 @@ Execute helpers following this order:
 1. iam_permissions_kops
 1. r53_zone_setup
 1. s3_bucket
-1. start_k8s_cluster
+1. start_k8s_cluster (wait until the cluster is ready, kops validate cluster)
 1. create_k8s_resources
 
 
@@ -27,9 +27,10 @@ Execute helpers following this order:
 
 ### AWS
 - New vpc created by default
-- 3 private subnets (with route tables pointing to a bastion)
+- 3 private subnets (with route tables pointing to the NAT-GWs)
 - 3 public subnets (named utility subnets)
-- AutoScalingGroup for Bastion nodes
+- 3 NAT Gateways (one for each AZ)
+- AutoScalingGroup for bastion node (min of 1 instance, max of 1)
 - AutoScalingGroup for master (min of 1 instance, max of 1) on AZ-a 
 - AutoScalingGroup for master (min of 1 instance, max of 1) on AZ-b
 - AutoScalingGroup for master (min of 1 instance, max of 1) on AZ-c
