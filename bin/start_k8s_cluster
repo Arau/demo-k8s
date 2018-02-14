@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Create Kubernetes cluster
+# WARNING: the flag --yes will create the cluster right away, if you want
+# to see the changes before triggering the bootstrap, you should remove
+# that flag.
+
 # Load variables to have name consistency across the bootstrap process
 source ../etc/vars.conf
 
