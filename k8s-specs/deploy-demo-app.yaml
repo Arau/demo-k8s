@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: demo-app
+  namespace: demo
+  labels:
+    app: demo-app
+    tier: frontend
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: demo-app
+        tier: frontend
+    spec:
+      containers:
+      - name: demo-app
+        image: arau/demo-nodejs:latest
+        ports:
+        - containerPort: 8080

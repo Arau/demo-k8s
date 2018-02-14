@@ -1,0 +1,11 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: demo-ingress
+    namespace: demo
+    annotations:
+        ingress.kubernetes.io/rewrite-target: /
+spec:
+    backend:
+        serviceName: demo-app
+        servicePort: 80
