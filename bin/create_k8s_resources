@@ -1,8 +1,9 @@
 #!/bin/bash
 
-#set -e
-
 # Wrapper to deploy YAML specs in the right order
+
+set -e
+
 SPECS_DIR=../k8s-specs
 
 # Load variables to have name consistency across the bootstrap process
@@ -18,12 +19,13 @@ kubectl create -f $SPECS_DIR/default-backend.yaml
 kubectl create -f $SPECS_DIR/svc-demo-app.yaml
 kubectl create -f $SPECS_DIR/deploy-demo-app.yaml
 
-kubectl create -f $SPECS_DIR/svc-nginx-ingress.yaml
 kubectl create -f $SPECS_DIR/deploy-nginx-ingress-controller.yaml
 kubectl create -f $SPECS_DIR/ingress-demo-app.yaml
+kubectl create -f $SPECS_DIR/svc-nginx-ingress.yaml
 
 
 echo "Waiting for URL to be ready..."
+sleep 60
 while true; do
     elb=`kubectl get svc ingress-nginx --namespace=$NAMESPACE | grep ingress-nginx | awk '{print $3}'`
     if [ "$elb" != "<pending>" ]; then
