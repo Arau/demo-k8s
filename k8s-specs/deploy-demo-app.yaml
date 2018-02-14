@@ -17,5 +17,10 @@ spec:
       containers:
       - name: demo-app
         image: arau/demo-nodejs:latest
+        resources:
+            requests:
+                cpu: 100m
+            limits:
+                memory: "256Mi"
         ports:
         - containerPort: 8080
