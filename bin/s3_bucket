@@ -12,13 +12,13 @@ source ../etc/vars.conf
 # S3_BUCKET_NAME
 # AWS_REGION
 
-bucket_exists=$(aws s3 ls | grep -c $S3_BUCKET_NAME)
 
-if [ $bucket_exists -eq 1 ]; then
+# Check if bucket exists
+if aws s3 ls | grep $S3_BUCKET_NAME; then
     echo "The bucket $S3_BUCKET_NAME already exists, please use a different bucket name. Finishing execution for security."
     exit 1
 fi
 
-
+echo "Creating bucket $S3_BUCKET_NAME"
 aws s3api create-bucket --region $AWS_REGION --bucket $S3_BUCKET_NAME  --create-bucket-configuration LocationConstraint=$AWS_REGION
 aws s3api put-bucket-versioning --region $AWS_REGION --bucket $S3_BUCKET_NAME --versioning-configuration Status=Enabled
