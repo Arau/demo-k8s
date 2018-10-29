@@ -18,16 +18,14 @@ source ../etc/vars.conf
 
 kops create cluster "$CLUSTER_NAME" \
     --cloud aws \
-    --master-count 3 \
+    --master-count 1 \
     --node-count 2 \
     --state "$KOPS_STATE_STORE" \
     --dns-zone "$DNS_ZONE_NAME" \
-    --master-size t2.medium \
-    --node-size t2.small \
-    --zones "${AWS_REGION}a,${AWS_REGION}b,${AWS_REGION}c" \
-    --master-zones "${AWS_REGION}a,${AWS_REGION}b,${AWS_REGION}c" \
-    --networking kopeio-vxlan \
-    --topology private \
-    --bastion=true \
-    --yes
+    --master-size t2.large \
+    --node-size t2.large \
+    --zones ${AWS_REGION}b \
+    --master-zones ${AWS_REGION}b \
+    --networking kopeio-vxlan 
+    #--yes
 
